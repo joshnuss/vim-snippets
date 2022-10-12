@@ -1,6 +1,6 @@
 # My ViM snippets
 
-Sync of my `~/.vim/snippets` folder.
+Sync of `~/.vim/snippets` folder.
 
 ## Requires
 
