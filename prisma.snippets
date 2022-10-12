@@ -1,0 +1,30 @@
+snippet model "define a model"
+	model ${1:Name} {
+		id Int @id @default(autoincrement())
+		${2}
+
+		createdAt DateTime @default(now())
+		updatedAt DateTime @updatedAt
+	}
+
+snippet enum "define an enum"
+	enum ${1:Name} {
+		${2:VALUE}
+	}
+
+snippet field "define a field"
+	${1:name} ${2:String}
+
+snippet many "define a has many relationship"
+	${1:authors} ${2:Author}[]
+
+snippet belongs "define a belongs to relationship"
+	${1:author} ${2:Author} @relation(fields: [$1Id], references: [id])
+	$1Id Int
+
+snippet index "define an index"
+	@@index([${1:field}])
+
+snippet unique "define a unique index"
+	@@unique([${1:field}])
+

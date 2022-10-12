@@ -1,0 +1,123 @@
+snippet createt "create table"
+	create table(:${1:name}) do
+		${2}
+
+		timestamps()
+	end
+
+snippet createi "create index"
+	create index(:${1:name}, [:${2:column_name}])
+
+snippet col "add column"
+	add :${1:name}, :${2:string}
+
+snippet colr "add column with reference"
+	add :${1:user}_id, references(:$1s)
+
+snippet schema "ecto schema"
+	defmodule ${1:Namespace}.${2:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} do
+		use Ecto.Schema
+		import Ecto.Changeset
+
+		schema "${3:table_name}" do
+			${4}
+
+			timestamps()
+		end
+	end
+
+snippet field "ecto field"
+	field :${1:name}, :${2:string}
+
+snippet belongs_to "ecto belongs_to assoc"
+	belongs_to :${1:name}, ${2:Schema}
+
+snippet get "setup route"
+	get "/${1}", ${2:Page}Controller, :${3:index}
+
+snippet controller "controller"
+	defmodule ${1:Module}.${2:Page}Controller do
+		use $1, :controller
+	end
+
+snippet action "controller action"
+	def ${1:index}(conn, _params) do
+		render conn, "$1.html"
+	end
+
+snippet gen_server "create a gen server"
+	defmodule ${1:Name} do
+		use GenServer
+
+		@name __MODULE__
+
+		def start_link do
+			GenServer.start_link(__MODULE__, ${2:[]}, name: @name)
+		end
+
+		def init(state) do
+			{:ok, state}
+		end
+
+		${3}
+	end
+
+snippet init "define gen server init function"
+	def init(${1:initial}) do
+		{:ok, $1}
+	end
+
+snippet startl "define gen server start_link function"
+	def start_link(${1:initial}) do
+		GenServer.start_link(__MODULE__, $1)
+	end
+
+snippet hc "define handle_call"
+	def handle_call({:${1:message}, ${2:params}}, _from, ${3:state}) do
+		{:reply, :ok, $3}
+	end
+
+	def $1(${4:pid}, $2) do
+		GenServer.call($4, {:$1, $2})
+	end
+
+snippet hs "define handle_cast"
+	def handle_cast({:${1:message}, ${2:params}}, ${3:state}) do
+		{:noreply, $3}
+	end
+
+	def $1(${4:pid}, $2) do
+		GenServer.cast($4, {:$1, $2})
+	end
+
+snippet dynamic_supervisor "create a dynamic supervisor"
+	defmodule ${1:Module}.${2:Name}Supervisor do
+		use DynamicSupervisor
+
+		alias $1.$2
+
+		@name __MODULE__
+
+		def start_link(_),
+			do: DynamicSupervisor.start_link(__MODULE__, :ok, name: @name)
+
+		def init(:ok) do
+			DynamicSupervisor.init(strategy: :one_for_one)
+		end
+
+		def start_child(${3:parameter}) do
+			DynamicSupervisor.start_child(@name, {$2, [$3]})
+		end
+	end
+
+snippet test_file "create a ex_unit test file"
+	defmodule ${1:Module}.${2:Name}Test do
+		use ExUnit.Case
+
+		${3}
+	end
+
+snippet describe "create a ex_unit describe"
+	describe "${1}" do
+		${2}
+	end

@@ -1,0 +1,14 @@
+snippet vue "default .vue file"
+	<template>
+	  ${1}
+	</template>
+
+	<script>
+	export default {
+		name: '${2:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`}'
+	};
+	</script>
+
+	<style scoped>
+	  ${3}
+	</style>

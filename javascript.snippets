@@ -1,0 +1,40 @@
+snippet import "import a package"
+	import ${1:name} from '${2:name}'
+
+snippet get "define a SvelteKit GET endpoint"
+	export async function GET({ request }) {
+		return new Response(${1})
+	}
+
+snippet post "define a SvelteKit POST endpoint"
+	export async function POST({ request }) {
+		const data = await request.formData()
+		return new Response(${1})
+	}
+
+snippet del "define a SvelteKit DELETE endpoint"
+	export async function DELETE({ request }) {
+		const body = await request.json()
+		return new Response(${1})
+	}
+
+snippet response "return a SvelteKit response"
+	return new Response(${1}, {
+		status: ${2:201},
+		headers: {
+			${3:key}: '${4:value}'
+		}
+	})
+
+snippet describe "describe a set of tests"
+	describe('${1:name}', () => {
+		${2}
+	})
+
+snippet test "add a test"
+	test('${1:test name}', async () => {
+		${2}
+	})
+
+snippet expect "add an expectation"
+	expect(${1:actual}).${2:toBe}(${3:expectation})
